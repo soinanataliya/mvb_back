@@ -1,19 +1,15 @@
-export class Accessories {
+export class Accessory {
   id: string;
-
   src: string;
-
   name?: string;
-
   price?: string;
-
   category: Array<string>;
 
   constructor(
+    id: string,
     src: string,
     name?: string,
     price?: string,
-    id?: string,
     category?: Array<string>,
   ) {
     this.id = id;
