@@ -10,7 +10,10 @@ async function bootstrap() {
 
   app.enableCors();
 
-  await app.listen(3000);
+  const port = 4000;
+
+  await app.listen(port);
+  console.log(`Server started at host http://localhost:${port}`);
 }
 
 bootstrap();

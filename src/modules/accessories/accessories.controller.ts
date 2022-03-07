@@ -19,12 +19,20 @@ export class AccessoriesController {
     @Body('name') name: string,
     @Body('price') price: string,
   ): any {
-    const generatedId = this.accessoriesService.insertAccessory(
+    const generatedData = this.accessoriesService.insertAccessory(
       src,
       name,
       price,
     );
-    return { id: generatedId };
+
+    console.log('generatedData', generatedData);
+
+    this.dbConnectionService
+      .connection('acc')
+      .insert(generatedData)
+      .then((result) => {
+        return result;
+      });
   }
 
   @Get()

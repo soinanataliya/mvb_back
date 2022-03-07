@@ -11,6 +11,7 @@ export class DbConnectionService {
       connection: {
         filename: `db/mvb.db`,
       },
+      useNullAsDefault: true,
     });
 
     return this.connection;

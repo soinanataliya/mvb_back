@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Accessory } from './accessories.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AccessoriesService {
@@ -10,8 +11,8 @@ export class AccessoriesService {
     name: string,
     price: string,
     // category?: Array<string>,
-  ): string {
-    const id = new Date().toString();
+  ): Accessory {
+    const id = uuidv4();
     const newAccessory = new Accessory(
       id,
       src,
@@ -19,7 +20,6 @@ export class AccessoriesService {
       price,
       // category,
     );
-    this.accessories.push(newAccessory);
-    return id;
+    return newAccessory;
   }
 }
