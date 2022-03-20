@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post } from '@nestjs/common';
 import { DbConnectionService } from '../dbConnection/dbConnection.service';
 import { AccessoriesService } from './accessories.service';
 @Controller('accessories')
@@ -25,8 +25,6 @@ export class AccessoriesController {
       price,
     );
 
-    console.log('generatedData', generatedData);
-
     this.dbConnectionService
       .connection('acc')
       .insert(generatedData)
@@ -38,5 +36,19 @@ export class AccessoriesController {
   @Get()
   findAll(): Promise<unknown> {
     return this.dbConnectionService.connection('acc').select();
+  }
+
+  @Delete()
+  deleteAccessory(@Body('id') id: string): string {
+    try {
+      const deletingId = id;
+      this.dbConnectionService.connection('acc').del().where({
+        id: deletingId,
+      });
+
+      return `id ${deletingId} удален`;
+    } catch (error) {
+      return error.message;
+    }
   }
 }
